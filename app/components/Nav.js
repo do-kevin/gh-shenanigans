@@ -15,8 +15,8 @@ function Nav() {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName='active' to='/battle'>
-          Battle
+        <NavLink activeClassName='active' to='/compare'>
+          Compare
         </NavLink>
       </li>
     </ul>
