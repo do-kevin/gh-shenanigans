@@ -68,10 +68,49 @@ li {
   font-weight: 600;
 }
 
+.nav {
+	display: flex;
+}
+
+.active {
+	font-weight: bold;
+	border-bottom: 3px solid hsl(24, 100%, 50%);
+}
+
+.nav li {
+	margin-right: 15px;
+}
+
+.nav li a {
+	color: hsl(0, 0%, 100%);
+	text-decoration: none;
+	padding: 10px 20px;
+	width: 100px;
+}
+
+.home-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button {
+	background-color: hsl(210, 100%, 50%);
+	color: hsl(0, 0%, 100%);
+	padding: 10px 20px;
+	border-top: 2px solid hsl(210, 100%, 40%);
+	text-decoration: none;
+}
+
+.button:hover:enabled {
+	border-top: none;
+	box-shadow: inset 1px 0 5px 2px hsl(210, 100%, 20%);
+}
+
 .loader,
 .loader:before,
 .loader:after {
-	background: #ffffff;
+	background: hsl(0, 0%, 100%);
 	-webkit-animation: load1 1s infinite ease-in-out;
 	animation: load1 1s infinite ease-in-out;
 	width: 1em;
