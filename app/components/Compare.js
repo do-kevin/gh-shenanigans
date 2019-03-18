@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = require('prop-types');
+var Link = require('react-router-dom').Link;
 
 function PersonPreview (props) {
   return (
@@ -124,7 +125,8 @@ class Compare extends React.Component {
 		var personOneName = this.state.personOneName;
     var personTwoName = this.state.personTwoName;
     var personOneImage = this.state.personOneImage;
-    var personTwoImage = this.state.personTwoImage;
+		var personTwoImage = this.state.personTwoImage;
+		var match = this.props.match;
 
 		return (
 			<div>
@@ -138,6 +140,18 @@ class Compare extends React.Component {
           
           {personTwoImage !== null && <PersonPreview avatar={personTwoImage} username={personTwoName} onReset={this.handleReset} personId={"personTwo"}
           />}
+				</div>
+				
+				<div style={{
+					margin: '50px auto',
+					width: '167px',
+					height: '29px'
+				}}>
+				{personOneImage && personTwoImage && <Link className='button' to={{
+					pathname: match.url + '/results',
+					search: '?personOneName=' + personOneName + '&personTwoName=' + personTwoName
+				}}> Compare
+				</Link>}
 				</div>
 			</div>
 		);
