@@ -8,6 +8,9 @@ module.exports = {
     filename: 'index_bundle.js',
     publicPath: '/'
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     rules: [
       {test: /\.(js)$/, use: 'babel-loader'},
