@@ -14,21 +14,15 @@ function PersonPreview (props) {
         <h2 className='username'>
           @{props.username}
         </h2>
-        <button 
-          onClick={props.onReset.bind(null, props.personId)}
-          className='reset'>
-          Reset
-        </button>
       </div>
+      {props.children}
     </div>
   );
 }
 
 PersonPreview.propTypes = {
   avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
-  personId: PropTypes.string.isRequired
+  username: PropTypes.string.isRequired
 }
 
 module.exports = PersonPreview;

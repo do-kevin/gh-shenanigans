@@ -33,7 +33,7 @@ class PersonInput extends React.Component {
 
 	render() {
 		return (
-			<form className="column" onSubmit={this.handleSubmit} style={{marginTop: '50px'}}>
+			<form className="column" onSubmit={this.handleSubmit} style={{ marginTop: '50px' }}>
 				<label className="header" htmlFor="username">
 					{this.props.label}
 				</label>
@@ -70,8 +70,8 @@ class Compare extends React.Component {
 			personTwoImage: null
 		};
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleReset = this.handleReset.bind(this);
 	}
 
 	handleSubmit(personId, username) {
@@ -80,49 +80,79 @@ class Compare extends React.Component {
 			newState[personId + 'Name'] = username;
 			newState[personId + 'Image'] = 'http://github.com/' + username + '.png?size=200';
 			return newState;
-    });
-  }
-  
-  handleReset(personId) {
-    this.setState(function() {
-      var newState = {};
+		});
+	}
+
+	handleReset(personId) {
+		this.setState(function() {
+			var newState = {};
 			newState[personId + 'Name'] = '';
 			newState[personId + 'Image'] = null;
 			return newState;
-    });
-  }
+		});
+	}
 
 	render() {
 		var personOneName = this.state.personOneName;
-    var personTwoName = this.state.personTwoName;
-    var personOneImage = this.state.personOneImage;
+		var personTwoName = this.state.personTwoName;
+		var personOneImage = this.state.personOneImage;
 		var personTwoImage = this.state.personTwoImage;
 		var match = this.props.match;
 
 		return (
 			<div>
 				<div className="row">
-          {!personOneName && <PersonInput personId={"personOne"} label="Person One" onSubmit={this.handleSubmit} />}
-          
-          {personOneImage !== null && <PersonPreview avatar={personOneImage} username={personOneName} onReset={this.handleReset} personId={"personOne"}
-          />}
+					{!personOneName && (
+						<PersonInput personId={'personOne'} label="Person One" onSubmit={this.handleSubmit} />
+					)}
 
-          {!personTwoName && <PersonInput personId={"personTwo"} label="Person Two" onSubmit={this.handleSubmit} />}
-          
-          {personTwoImage !== null && <PersonPreview avatar={personTwoImage} username={personTwoName} onReset={this.handleReset} personId={"personTwo"}
-          />}
+					{personOneImage !== null && (
+						<PersonPreview
+							avatar={personOneImage}
+							username={personOneName}
+						>
+							<button onClick={this.handleReset.bind(null, 'personOne')} className="reset">
+								Reset
+							</button>
+						</PersonPreview>
+					)}
+
+					{!personTwoName && (
+						<PersonInput personId={'personTwo'} label="Person Two" onSubmit={this.handleSubmit} />
+					)}
+
+					{personTwoImage !== null && (
+						<PersonPreview
+						avatar={personTwoImage}
+						username={personTwoName}
+					>
+						<button onClick={this.handleReset.bind(null, 'personTwo')} className="reset">
+							Reset
+						</button>
+					</PersonPreview>
+					)}
 				</div>
-				
-				<div style={{
-					margin: '50px auto',
-					width: '167px',
-					height: '29px'
-				}}>
-				{personOneImage && personTwoImage && <Link className='button' to={{
-					pathname: match.url + '/results',
-					search: '?personOneName=' + personOneName + '&personTwoName=' + personTwoName
-				}}> Compare
-				</Link>}
+
+				<div
+					style={{
+						margin: '50px auto',
+						width: '167px',
+						height: '29px'
+					}}
+				>
+					{personOneImage &&
+					personTwoImage && (
+						<Link
+							className="button"
+							to={{
+								pathname: match.url + '/results',
+								search: '?personOneName=' + personOneName + '&personTwoName=' + personTwoName
+							}}
+						>
+							{' '}
+							Compare
+						</Link>
+					)}
 				</div>
 			</div>
 		);
