@@ -88,6 +88,14 @@ li {
 	width: 100px;
 }
 
+.profile-info {
+	font-weight: 500;
+	padding: 5px 10px;
+	color: hsl(210, 100%, 20%);
+	background-color: white;
+	border-radius: 5px;
+}
+
 .home-container {
 	display: flex;
 	flex-direction: column;
