@@ -13,8 +13,10 @@
     "start": "webpack-dev-server --open",
     "build:Windows": "SET NODE_ENV='production' && webpack",
     "build": "NODE_ENV='production' webpack",
-    "deploy": "",
-    "publish": ""
+    "firebase:init": "firebase login && firebase init",
+    "deploy": "npm run build && firebase deploy",
+    "use": "firebase use --add",
+    "firebase:disable": "firebase hosting:disable"
   },
   "repository": {
     "type": "git",
@@ -43,6 +45,7 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
     "firebase-tools": "^6.5.0",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
