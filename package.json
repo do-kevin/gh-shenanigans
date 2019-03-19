@@ -11,7 +11,10 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack"
+    "build:Windows": "SET NODE_ENV='production' && webpack",
+    "build": "NODE_ENV='production' webpack",
+    "deploy": "",
+    "publish": ""
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/do-kevin/gh-shenanigans/issues"
   },
-  "homepage": "https://github.com/do-kevin/gh-shenanigans#readme",
+  "homepage": "https://github.com/do-kevin/gh-shenanigans",
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^7.0.0",
@@ -39,6 +42,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
+    "firebase-tools": "^6.5.0",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
