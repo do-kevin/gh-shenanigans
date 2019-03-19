@@ -78,7 +78,7 @@ class Compare extends React.Component {
 		this.setState(function() {
 			var newState = {};
 			newState[personId + 'Name'] = username;
-			newState[personId + 'Image'] = 'http://github.com/' + username + '.png?size=200';
+			newState[personId + 'Image'] = 'https://github.com/' + username + '.png?size=200';
 			return newState;
 		});
 	}

@@ -8,7 +8,7 @@ function getProfile(username) {
 }
 
 function getRepos (username) {
-	return axios.get('http://api.github.com/users/' + username + '/repos?' + '&per_page=100');
+	return axios.get('https://api.github.com/users/' + username + '/repos?' + '&per_page=100');
 }
 
 function getStarCount (repos) {
@@ -57,11 +57,10 @@ module.exports = {
 	},
 	fetchPopularRepos: function(language) {
 		var encodedURI = window.encodeURI(
-			'http://api.github.com/search/repositories?q=stars:>1+language:' +
+			'https://api.github.com/search/repositories?q=stars:>1+language:' +
 				language +
 				'&sort=stars&order=desc&type=Repositories'
 		);
-
 		return axios.get(encodedURI).then(function(response) {
       return response.data.items;
     });
