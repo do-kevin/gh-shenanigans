@@ -3,18 +3,41 @@ var queryString = require('query-string');
 var api = require('../utils/api');
 var Link = require('react-router-dom').Link;
 var PropTypes = require('prop-types');
+var PersonPreview = require('./PersonPreview');
+
+function Profile (props) {
+
+  var info = props.info;
+
+  return (
+    <PersonPreview
+      avatar={info.avatar_url} 
+      username={info.login}>
+      <ul className='profile-info'>
+        {info.name && <li>{info.name}</li>}
+        {info.location && <li>{info.location}</li>}
+        {info.company && <li>{info.company}</li>}
+        <li>Followers: {info.followers}</li>
+        <li>Following: {info.following}</li>
+        <li>Public Repos: {info.public_repos}</li>
+        {info.blog && <li><a style={{color: 'hsl(210, 100%, 50%)'}}href={info.blog}>{info.blog}</a></li>}
+      </ul>
+    </PersonPreview>
+  );
+}
+
+Profile.propTypes = {
+  info: PropTypes.object.isRequired
+}
 
 function GHuser (props) {
   return (<div>
-    <h1 className='header'>
-      {props.label}
-    </h1>
     <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
+    <Profile info={props.profile}/>
   </div>);
 }
 
 GHuser.propTypes = {
-  label: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   profile: PropTypes.object.isRequired
 }
@@ -80,11 +103,11 @@ class Results extends React.Component {
         <GHuser
           score={winner.score}
           profile={winner.profile}
-          label={'Winner'}/>
+        />
         <GHuser
           score={loser.score}
           profile={loser.profile}
-          label={'Loser'}/>
+        />
       </div>
     );
   }
