@@ -1,9 +1,9 @@
-const React = require('react');
-const queryString = require('query-string');
-const api = require('../utils/api');
-const Link = require('react-router-dom').Link;
-const PropTypes = require('prop-types');
-const PersonPreview = require('./PersonPreview');
+import React from 'react';
+import queryString from 'query-string';
+import { compare } from '../utils/api';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import PersonPreview from './PersonPreview';
 
 function Profile ({info}) {
   return (
@@ -54,7 +54,7 @@ class Results extends React.Component {
 
   componentDidMount() {
     const {personOneName, personTwoName} = queryString.parse(this.props.location.search);
-    api.compare([
+    compare([
       personOneName,
       personTwoName
     ]).then((results) => {
@@ -103,4 +103,4 @@ class Results extends React.Component {
   }
 }
 
-module.exports = Results;
+export default Results;

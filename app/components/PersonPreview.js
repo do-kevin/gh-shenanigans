@@ -1,7 +1,7 @@
-var React = require('react');
-var PropTypes = require('prop-types');
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function PersonPreview ({ avatar, username, children}) {
+export default function PersonPreview ({ avatar, username, children}) {
   return (
     <div style={{marginTop: '50px'}}>
       <div className='column card'>
@@ -24,5 +24,3 @@ PersonPreview.propTypes = {
   avatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired
 }
-
-module.exports = PersonPreview;

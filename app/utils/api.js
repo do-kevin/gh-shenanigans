@@ -1,5 +1,4 @@
-var axios = require('axios');
-require('dotenv').config();
+import axios from 'axios';
 
 function getProfile(username) {
 	return axios.get(`https://api.github.com/users/${username}`).then(({data}) => data);
@@ -36,16 +35,15 @@ function sortPeople (people) {
 	return people.sort((a, b) => b.score - a.score);
 }
 
-module.exports = {
-	compare (people) {
-		return Promise.all(people.map(getUserData))
-			.then(sortPeople)
-			.catch(handleError);
-	},
-	fetchPopularRepos (language) {
-		const encodedURI = window.encodeURI(
-			`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
-		);
-		return axios.get(encodedURI).then(({data}) => data.items);
-	}
-};
+export function compare (people) {
+	return Promise.all(people.map(getUserData))
+	.then(sortPeople)
+	.catch(handleError);
+}
+
+export function fetchPopularRepos (language) {
+	const encodedURI = window.encodeURI(
+		`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
+	);
+	return axios.get(encodedURI).then(({data}) => data.items);
+}

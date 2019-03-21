@@ -1,7 +1,7 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const Link = require('react-router-dom').Link;
-const PersonPreview = require('./PersonPreview');
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import PersonPreview from './PersonPreview';
 
 class PersonInput extends React.Component {
 	constructor(props) {
@@ -153,4 +153,4 @@ class Compare extends React.Component {
 	}
 }
 
-module.exports = Compare;
+export default Compare;
