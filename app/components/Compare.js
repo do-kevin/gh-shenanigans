@@ -1,7 +1,7 @@
-var React = require('react');
-var PropTypes = require('prop-types');
-var Link = require('react-router-dom').Link;
-var PersonPreview = require('./PersonPreview');
+const React = require('react');
+const PropTypes = require('prop-types');
+const Link = require('react-router-dom').Link;
+const PersonPreview = require('./PersonPreview');
 
 class PersonInput extends React.Component {
 	constructor(props) {
@@ -16,13 +16,9 @@ class PersonInput extends React.Component {
 	}
 
 	handleChange(event) {
-		var value = event.target.value;
+		const value = event.target.value;
 
-		this.setState(function() {
-			return {
-				username: value
-			};
-		});
+		this.setState(() => ({ username: value }));
 	}
 
 	handleSubmit(event) {
@@ -32,20 +28,24 @@ class PersonInput extends React.Component {
 	}
 
 	render() {
+
+		const {username} = this.state;
+		const {label} = this.props;
+
 		return (
 			<form className="column" onSubmit={this.handleSubmit} style={{ marginTop: '50px' }}>
 				<label className="header" htmlFor="username">
-					{this.props.label}
+					{label}
 				</label>
 				<input
 					id="username"
 					placeholder="github username"
 					type="text"
 					autoComplete="off"
-					value={this.state.username}
+					value={username}
 					onChange={this.handleChange}
 				/>
-				<button className="button" type="submit" disabled={!this.state.username}>
+				<button className="button" type="submit" disabled={!username}>
 					Submit
 				</button>
 			</form>
@@ -75,29 +75,23 @@ class Compare extends React.Component {
 	}
 
 	handleSubmit(personId, username) {
-		this.setState(function() {
-			var newState = {};
-			newState[personId + 'Name'] = username;
-			newState[personId + 'Image'] = 'https://github.com/' + username + '.png?size=200';
-			return newState;
-		});
+		this.setState(() => ({
+			[personId + 'Name']: username,
+			[personId + 'Image']: `https://github.com/${username}.png?size=200`
+		}))
 	}
 
 	handleReset(personId) {
-		this.setState(function() {
-			var newState = {};
-			newState[personId + 'Name'] = '';
-			newState[personId + 'Image'] = null;
-			return newState;
-		});
+		this.setState(() => ({
+			[personId + 'Name']: '',
+			[personId + 'Image']: null
+		}));
 	}
 
 	render() {
-		var personOneName = this.state.personOneName;
-		var personTwoName = this.state.personTwoName;
-		var personOneImage = this.state.personOneImage;
-		var personTwoImage = this.state.personTwoImage;
-		var match = this.props.match;
+		const {personOneName, personTwoName, personOneImage, personTwoImage} = this.state;
+
+		const {match} = this.props;
 
 		return (
 			<div>
@@ -111,7 +105,7 @@ class Compare extends React.Component {
 							avatar={personOneImage}
 							username={personOneName}
 						>
-							<button onClick={this.handleReset.bind(null, 'personOne')} className="reset">
+							<button onClick={() => {this.handleReset('personOne')}} className="reset">
 								Reset
 							</button>
 						</PersonPreview>
@@ -126,7 +120,7 @@ class Compare extends React.Component {
 						avatar={personTwoImage}
 						username={personTwoName}
 					>
-						<button onClick={this.handleReset.bind(null, 'personTwo')} className="reset">
+						<button onClick={() => {this.handleReset('personTwo')}} className="reset">
 							Reset
 						</button>
 					</PersonPreview>
@@ -145,8 +139,8 @@ class Compare extends React.Component {
 						<Link
 							className="button"
 							to={{
-								pathname: match.url + '/results',
-								search: '?personOneName=' + personOneName + '&personTwoName=' + personTwoName
+								pathname: `${match.url}/results`,
+								search: `?personOneName=${personOneName}&personTwoName=${personTwoName}`
 							}}
 						>
 							{' '}
