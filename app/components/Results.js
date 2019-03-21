@@ -1,14 +1,11 @@
-var React = require('react');
-var queryString = require('query-string');
-var api = require('../utils/api');
-var Link = require('react-router-dom').Link;
-var PropTypes = require('prop-types');
-var PersonPreview = require('./PersonPreview');
+const React = require('react');
+const queryString = require('query-string');
+const api = require('../utils/api');
+const Link = require('react-router-dom').Link;
+const PropTypes = require('prop-types');
+const PersonPreview = require('./PersonPreview');
 
-function Profile (props) {
-
-  var info = props.info;
-
+function Profile ({info}) {
   return (
     <PersonPreview
       avatar={info.avatar_url} 
@@ -30,10 +27,10 @@ Profile.propTypes = {
   info: PropTypes.object.isRequired
 }
 
-function GHuser (props) {
+function GHuser ({ score, profile }) {
   return (<div>
-    <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
-    <Profile info={props.profile}/>
+    <h3 style={{textAlign: 'center'}}>Score: {score}</h3>
+    <Profile info={profile}/>
   </div>);
 }
 
@@ -56,36 +53,29 @@ class Results extends React.Component {
   }
 
   componentDidMount() {
-    var people = queryString.parse(this.props.location.search);
+    const {personOneName, personTwoName} = queryString.parse(this.props.location.search);
     api.compare([
-      people.personOneName,
-      people.personTwoName
-    ]).then(function(results) {
+      personOneName,
+      personTwoName
+    ]).then((results) => {
       if (results === null) {
-        return this.setState(function () {
-          return {
+        return this.setState(() => ({
             error: 'There was an error. Please check if both GitHub users exist',
             loading: false
-          }
-        });
+        }));
       }
 
-      this.setState(function() {
-        return {
+      this.setState(() => ({
           error: null,
           winner: results[0],
           loser: results[1],
           loading: false
-        }
-      });
-    }.bind(this));
+      }));
+    });
   }
 
   render() {
-    var error = this.state.error;
-    var winner = this.state.winner;
-    var loser = this.state.loser;
-    var loading = this.state.loading;
+    const { error, winner, loser, loading } = this.state;
 
     if (loading === true) {
       return (<div className="loader">Loading...</div>);
