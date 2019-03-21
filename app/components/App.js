@@ -1,13 +1,13 @@
-var React = require('react');
-var Popular = require('./Popular');
-var ReactRouter = require('react-router-dom');
-var Router = ReactRouter.BrowserRouter;
-var Route = ReactRouter.Route;
-var Switch = ReactRouter.Switch;
-var Nav = require('./Nav');
-var Home = require('./Home');
-var Compare = require('./Compare');
-var Results = require('./Results');
+const React = require('react');
+const Popular = require('./Popular');
+const ReactRouter = require('react-router-dom');
+const Router = ReactRouter.BrowserRouter;
+const Route = ReactRouter.Route;
+const Switch = ReactRouter.Switch;
+const Nav = require('./Nav');
+const Home = require('./Home');
+const Compare = require('./Compare');
+const Results = require('./Results');
 
 class App extends React.Component {
 	render() {
@@ -21,9 +21,18 @@ class App extends React.Component {
 						<Route exact path="/compare" component={Compare} />
 						<Route path="/compare/results" component={Results} />
 						<Route
-							render={function() {
-								return (<p style={{color: 'hsl(355, 70%, 46%)', textAlign: 'center', fontSize: '48px', fontWeight: 600}}>Not Found</p>);
-							}}
+							render={() => (
+								<p
+									style={{
+										color: 'hsl(355, 70%, 46%)',
+										textAlign: 'center',
+										fontSize: '48px',
+										fontWeight: 600
+									}}
+								>
+									Not Found
+								</p>
+							)}
 						/>
 					</Switch>
 				</div>

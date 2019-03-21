@@ -1,21 +1,21 @@
 var React = require('react');
 var PropTypes = require('prop-types');
 
-function PersonPreview (props) {
+function PersonPreview ({ avatar, username, children}) {
   return (
     <div style={{marginTop: '50px'}}>
       <div className='column card'>
         <img 
           className='avatar'
-          src={props.avatar}
-          alt={'Avatar for ' + props.username}
+          src={avatar}
+          alt={'Avatar for ' + username}
         />
 
         <h2 className='username'>
-          @{props.username}
+          @{username}
         </h2>
       </div>
-      {props.children}
+      {children}
     </div>
   );
 }
