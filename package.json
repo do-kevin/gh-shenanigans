@@ -33,13 +33,13 @@
   },
   "homepage": "https://github.com/do-kevin/gh-shenanigans",
   "dependencies": {
-    "axios": "^0.18.0",
     "dotenv": "^7.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.4.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-router-dom": "^4.4.0"
+    "react-router-dom": "^4.4.0",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
