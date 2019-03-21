@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PersonPreview from './PersonPreview';
 
-class PersonInput extends React.Component {
-	constructor(props) {
-		super(props);
+class PersonInput extends Component {
 
-		this.state = {
-			username: ''
-		};
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+	static propTypes = {
+		personId: PropTypes.string.isRequired,
+		label: PropTypes.string.isRequired,
+		onSubmit: PropTypes.func.isRequired
 	}
 
-	handleChange(event) {
+	static defaultProps = {
+		label: 'Username'
+	}
+
+	state = {
+		username: ''
+	};
+
+	handleChange = (event) => {
 		const value = event.target.value;
 
 		this.setState(() => ({ username: value }));
 	}
 
-	handleSubmit(event) {
+	handleSubmit = (event) => {
 		event.preventDefault();
 
 		this.props.onSubmit(this.props.personId, this.state.username);
@@ -53,35 +57,23 @@ class PersonInput extends React.Component {
 	}
 }
 
-PersonInput.propTypes = {
-	personId: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
-	onSubmit: PropTypes.func.isRequired
-};
+class Compare extends Component {
 
-class Compare extends React.Component {
-	constructor(props) {
-		super(props);
+	state = {
+		personOneName: '',
+		personTwoName: '',
+		personOneImage: null,
+		personTwoImage: null
+	};
 
-		this.state = {
-			personOneName: '',
-			personTwoName: '',
-			personOneImage: null,
-			personTwoImage: null
-		};
-
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleReset = this.handleReset.bind(this);
-	}
-
-	handleSubmit(personId, username) {
+	handleSubmit = (personId, username) => {
 		this.setState(() => ({
 			[personId + 'Name']: username,
 			[personId + 'Image']: `https://github.com/${username}.png?size=200`
 		}))
 	}
 
-	handleReset(personId) {
+	handleReset = (personId) => {
 		this.setState(() => ({
 			[personId + 'Name']: '',
 			[personId + 'Image']: null
@@ -89,9 +81,9 @@ class Compare extends React.Component {
 	}
 
 	render() {
-		const {personOneName, personTwoName, personOneImage, personTwoImage} = this.state;
+		const { personOneName, personTwoName, personOneImage, personTwoImage } = this.state;
 
-		const {match} = this.props;
+		const { match } = this.props;
 
 		return (
 			<div>

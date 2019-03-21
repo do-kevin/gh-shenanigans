@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import queryString from 'query-string';
 import { compare } from '../utils/api';
 import { Link } from 'react-router-dom';
@@ -39,17 +39,13 @@ GHuser.propTypes = {
   profile: PropTypes.object.isRequired
 }
 
-class Results extends React.Component {
+class Results extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      winner: null,
-      loser: null,
-      error: null,
-      loading: true
-    }
+  state = {
+    winner: null,
+    loser: null,
+    error: null,
+    loading: true
   }
 
   componentDidMount() {

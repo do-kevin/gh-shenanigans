@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fetchPopularRepos } from '../utils/api';
 
@@ -72,22 +72,18 @@ RepoGrid.propTypes = {
 	repos: PropTypes.array.isRequired
 };
 
-class Popular extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			languageSelected: 'All',
-			repos: null
-		};
+class Popular extends Component {
 
-		this.updateLanguage = this.updateLanguage.bind(this);
-	}
+	state = {
+		languageSelected: 'All',
+		repos: null
+	};
 
 	componentDidMount() {
 		this.updateLanguage(this.state.languageSelected);
 	}
 
-	updateLanguage(lang) {
+	updateLanguage = (lang) => {
 		this.setState(() => ({
 				languageSelected: lang,
 				repos: null
