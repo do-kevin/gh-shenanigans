@@ -48,26 +48,27 @@ class Results extends Component {
     loading: true
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {personOneName, personTwoName} = queryString.parse(this.props.location.search);
-    compare([
+
+    const results = await compare([
       personOneName,
       personTwoName
-    ]).then((results) => {
-      if (results === null) {
-        return this.setState(() => ({
-            error: 'There was an error. Please check if both GitHub users exist',
-            loading: false
-        }));
-      }
+    ])
 
-      this.setState(() => ({
-          error: null,
-          winner: results[0],
-          loser: results[1],
+    if (results === null) {
+      return this.setState(() => ({
+          error: 'There was an error. Please check if both GitHub users exist',
           loading: false
       }));
-    });
+    }
+
+    this.setState(() => ({
+        error: null,
+        winner: results[0],
+        loser: results[1],
+        loading: false
+    }));
   }
 
   render() {
